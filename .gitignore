@@ -13,6 +13,7 @@
 *.json
 *.mp4
 *.gif
+*.avi
 data/series
 data/snapshots/*
 data/transport/*
