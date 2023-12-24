@@ -74,7 +74,13 @@ def load_all(plates):
     time_plate_info["density_biovolume"] = time_plate_info["tot_biovolume_study"] / time_plate_info["area_sep_comp"]
     time_plate_info["density_SA"] = time_plate_info["tot_surface_area_study"] / time_plate_info["area_sep_comp"]
     time_plate_info['radius'] = np.sqrt(time_plate_info['tot_biovolume_study']/time_plate_info['tot_length_study']/2/np.pi)
+    time_plate_info['radius_SA'] = time_plate_info['tot_biovolume_study']/time_plate_info['tot_surface_area_study']*2
     df_sum = load_summary()
+    df_sum['FungalSide'] = df_sum['FungalSide'].fillna("100P/100N/100C")   
+    df_sum['FungalSide'] = df_sum['FungalSide'].replace("100P100N100C","100P/100N/100C")
+    df_sum['FungalSide'] = df_sum['FungalSide'].replace("100P100N100C","100P/100N/100C")
+
+    df_sum['treatment'] = df_sum['treatment'].replace("1P100N100C","1P/100N/100C")
     final_data = merge_summary_df(time_plate_info,df_sum,folders,plates)
     plate_speeds, plate_density, plate_density_biov, plate_radius, plate_radius_SA, \
     plate_strain, plate_start, plate_SA_density, fungalC, root = get_plate_info(plates, final_data, folders)
@@ -84,7 +90,10 @@ def load_all(plates):
     merged_df = df.merge(df_sum, left_on='plate_id', right_on='unique_id', how='inner')
     merged_df['FungalSide'] = merged_df['FungalSide'].fillna("100P/100N/100C")   
     merged_df['age'] = merged_df['age'].dt.days.astype(int)
-    
+    merged_df['FungalSide'] = merged_df['FungalSide'].replace("100P100N100C","100P/100N/100C")
+    merged_df['FungalSide'] = merged_df['FungalSide'].replace("100P100N100C","100P/100N/100C")
+
+    merged_df['treatment'] = merged_df['treatment'].replace("1P100N100C","1P/100N/100C")
     return merged_df,final_data
 
 def load_summary():

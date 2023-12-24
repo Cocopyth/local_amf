@@ -162,12 +162,12 @@ def zero_regplot(data, x, y, ax, label, scatter=True, n_boot=1000, color=None):
     ci_upper = np.percentile(bootstrapped_slopes, 97.5)
 
     # Create regression line
-    x_vals = np.array(ax.get_xlim())
+    x_vals = x_data
     y_vals = slope_estimate * x_vals
 
     # Plot
     if scatter:
-        ax.scatter(x_data, y_data, alpha=0.7, label=label)
+        ax.scatter(x_data, y_data, alpha=0.7,s=3)
     ax.plot(x_vals, y_vals, color=color, label=f'{label} Slope: {slope_estimate:.2f}')
     ax.fill_between(x_vals, ci_lower * x_vals, ci_upper * x_vals, color=color, alpha=0.2)
 

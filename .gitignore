@@ -24,3 +24,5 @@ data/20210823_1128_Plate39/*
 *.tiff
 tests/__pycache__/
 tests/.idea/
+*.svg
+*.pyc
