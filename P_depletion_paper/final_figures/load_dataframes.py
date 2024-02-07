@@ -143,6 +143,8 @@ def merge_summary_df(time_plate_info,df_sum,folders,plates,thresh_area = 200):
         time_plate_info_plate['ZMUV_SA'] = (time_plate_info_plate['radius']**2-np.mean(time_plate_info_plate['radius']**2))
         time_plate_info_plate['real_root'] = df_sum[df_sum['unique_id']==plate_id]['real_root'].iloc[0]
         time_plate_info_plate['fungalC'] = df_sum[df_sum['unique_id']==plate_id]['FungalSide'].iloc[0]
+        time_plate_info_plate['treatment'] = df_sum[df_sum['unique_id']==plate_id]['treatment'].iloc[0]
+        
 
         time_plate_info_plate['strain'] = df_sum[df_sum['unique_id']==plate_id]['fungus'].iloc[0]
         
